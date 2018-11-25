@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>goodsmgrweb</artifactId>
+    <artifactId>ordermgr</artifactId>
     <packaging>war</packaging>
 
-    <name>goodsmgrweb Maven Webapp</name>
+    <name>ordermgr Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
     <url>http://sishuok.com</url>
 
@@ -32,7 +32,7 @@
     </dependencies>
 
     <build>
-        <finalName>goodsmgrweb</finalName>
+        <finalName>ordermgr</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
@@ -42,7 +42,7 @@
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopPort>9999</stopPort>
                     <webAppConfig>
-                        <contextPath>/goods</contextPath>
+                        <contextPath>/order</contextPath>
                     </webAppConfig>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">

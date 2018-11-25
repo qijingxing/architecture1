@@ -14,7 +14,7 @@
 
     <name>architecture1web Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>http://sishuok.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,6 +41,24 @@
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>
+        <dependency>
+            <groupId>com.sishuok</groupId>
+            <artifactId>cartmgr</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sishuok</groupId>
+            <artifactId>ordermgr</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sishuok</groupId>
+            <artifactId>storemgr</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -60,7 +78,37 @@
                             <groupId>com.sishuok</groupId>
                             <artifactId>goodsmgrweb</artifactId>
                         </overlay>
+                        <overlay>
+                            <groupId>com.sishuok</groupId>
+                            <artifactId>cartmgr</artifactId>
+                        </overlay>
+                        <overlay>
+                            <groupId>com.sishuok</groupId>
+                            <artifactId>ordermgr</artifactId>
+                        </overlay>
+                        <overlay>
+                            <groupId>com.sishuok</groupId>
+                            <artifactId>storemgr</artifactId>
+                        </overlay>
                     </overlays>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.14.v20131031</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <stopPort>9999</stopPort>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>9080</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                 </configuration>
             </plugin>
         </plugins>
@@ -97,6 +145,5 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
     </build>
 </project>
