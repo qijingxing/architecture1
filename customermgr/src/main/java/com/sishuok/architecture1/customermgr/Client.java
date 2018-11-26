@@ -28,7 +28,11 @@ public class Client {
         customerModel.setShowName("c1");
         customerModel.setTrueName("张三");
         t.dao.create(customerModel);
-        List<CustomerDAO> list = t.dao.getByCondition(new CustomerQueryModel());
+
+        CustomerQueryModel cqm = new CustomerQueryModel();
+        cqm.getPage().setNowPage(1);
+        cqm.getPage().setPageShow(4);
+        List<CustomerModel> list = t.dao.getByConditionPage(cqm);
         System.out.println("list =="+list);
 
 
