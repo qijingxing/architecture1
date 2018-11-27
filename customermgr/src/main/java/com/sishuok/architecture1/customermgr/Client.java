@@ -1,22 +1,27 @@
 package com.sishuok.architecture1.customermgr;
 
-import com.sishuok.architecture1.customermgr.dao.CustomerDAO;
+import com.sishuok.architecture1.customermgr.service.IcustomerService;
 import com.sishuok.architecture1.customermgr.vo.CustomerModel;
 import com.sishuok.architecture1.customermgr.vo.CustomerQueryModel;
+import com.sishuok.pageutil.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by qi on 2018/11/24.
  */
 @Service
+@Transactional
 public class Client {
     @Autowired
-    private CustomerDAO dao = null;
+    private IcustomerService s = null;
+
+    public IcustomerService  getS(){
+        return s;
+    }
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -27,12 +32,12 @@ public class Client {
         customerModel.setRegisterTime("111");
         customerModel.setShowName("c1");
         customerModel.setTrueName("张三");
-        t.dao.create(customerModel);
+       // t.s.create(customerModel);
 
         CustomerQueryModel cqm = new CustomerQueryModel();
         cqm.getPage().setNowPage(1);
         cqm.getPage().setPageShow(4);
-        List<CustomerModel> list = t.dao.getByConditionPage(cqm);
+        Page<CustomerModel> list = t.getS().getByConditionPage(cqm);
         System.out.println("list =="+list);
 
 

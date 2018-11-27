@@ -1,23 +1,17 @@
 package com.sishuok.architecture1.customermgr.vo;
 
+import com.sishuok.architecture1.common.vo.BaseModel;
+
 /**
  * Created by qi on 2018/11/24.
  */
-public class CustomerModel {
-    private Integer uuid;
+public class CustomerModel extends BaseModel{
     private String customerId;
     private String pwd;
     private String showName;
     private String trueName;
     private String registerTime;
 
-    public Integer getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(Integer uuid) {
-        this.uuid = uuid;
-    }
 
     public String getCustomerId() {
         return customerId;
@@ -63,8 +57,7 @@ public class CustomerModel {
     @Override
     public String toString() {
         return "CustomerModel{" +
-                "uuid=" + uuid +
-                ", customerId='" + customerId + '\'' +
+                "customerId='" + customerId + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", showName='" + showName + '\'' +
                 ", trueName='" + trueName + '\'' +
