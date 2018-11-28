@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Page<E> implements java.io.Serializable{
 	
-	private int pageShow = 2; 
+	private int pageShow = 10;
 	private int totalPage;
 	private int totalCount;
 	private int start;

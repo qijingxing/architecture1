@@ -18,5 +18,16 @@ public class JsonHelper {
         }
         return  retStr;
     }
+    public static Object str2Object(String str,Class cls){
+        Object retObj = null;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            retObj = mapper.readValue(str, cls);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return retObj;
+    }
 
 }

@@ -4,6 +4,7 @@ import com.sishuok.architecture1.customermgr.service.IcustomerService;
 import com.sishuok.architecture1.customermgr.vo.CustomerModel;
 import com.sishuok.architecture1.customermgr.vo.CustomerQueryModel;
 import com.sishuok.pageutil.Page;
+import com.sishuok.util.json.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,14 +50,31 @@ public class CustomerController {
         ics.delete(customerUuid);
         return "customer/success";
     }
-    @RequestMapping(value = "toList",method = RequestMethod.GET)
-    public String toList(@RequestParam("queryJsonStr") String queryJson, @ModelAttribute("page")Page pageWW) {
-        CustomerQueryModel cqm =null;
-        if(queryJson ==null ||queryJson.trim().length() == 0){
-            cqm = new CustomerQueryModel();
-        }else {
+    @RequestMapping(value="toList",method=RequestMethod.GET)
+    public String toList(@ModelAttribute("wm")CustomerWebModel wm,Model model){
+        CustomerQueryModel cqm = null;
+        if(wm.getQueryJsonStr()==null || wm.getQueryJsonStr().trim().length()==0){
+            cqm =  new CustomerQueryModel();
+        }else{
+            cqm = (CustomerQueryModel)JsonHelper.str2Object(wm.getQueryJsonStr(), CustomerQueryModel.class);
         }
-        return "customer/success";
+
+        cqm.getPage().setNowPage(wm.getNowPage());
+        if(wm.getPageShow() > 0){
+            cqm.getPage().setPageShow(wm.getPageShow());
+        }
+
+        Page dbPage = ics.getByConditionPage(cqm);
+
+        //
+        model.addAttribute("wm", wm);
+        model.addAttribute("page", dbPage);
+
+        return "customer/list";
+    }
+    @RequestMapping(value="toQuery",method=RequestMethod.GET)
+    public String toQuery(){
+        return "customer/query";
     }
 
 
